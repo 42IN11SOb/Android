@@ -1,13 +1,15 @@
-package com.avans.in11sob.pep_android;
+package com.avans.in11sob.pep_android.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class KleurenPaletActivity extends AppCompatActivity {
+import com.avans.in11sob.pep_android.R;
+
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kleuren_palet);
+        setContentView(R.layout.activity_settings);
     }
 }

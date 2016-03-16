@@ -1,9 +1,11 @@
-package com.avans.in11sob.pep_android;
+package com.avans.in11sob.pep_android.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.avans.in11sob.pep_android.R;
 
 public class PassportActivity extends AppCompatActivity {
 

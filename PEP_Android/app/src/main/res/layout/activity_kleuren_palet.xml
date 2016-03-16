@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0sp"
-    tools:context="com.avans.in11sob.pep_android.KleurenPaletActivity">
+    tools:context=".Activity.KleurenPaletActivity">
 
     <ListView
         android:layout_width="match_parent"
