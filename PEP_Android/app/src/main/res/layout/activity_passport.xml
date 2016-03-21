@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -15,18 +15,20 @@
         android:id="@+id/stijl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_stijl"
+        android:background="@color/buttonOddColor"
         android:text="@string/button_stijl"
         android:textSize="20sp"
+        android:textColor="@color/textOddColor"
         android:onClick="buttonClick"
         android:layout_weight="0.33" />
     <Button
         android:id="@+id/kleurenPalet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_kleurenPalet"
+        android:background="@color/buttonEvenColor"
         android:text="@string/button_kleurenPalet"
         android:textSize="20sp"
+        android:textColor="@color/textEvenColor"
         android:onClick="buttonClick"
         android:layout_weight="0.33" />
 </LinearLayout>

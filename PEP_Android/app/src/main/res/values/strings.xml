@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Home</string>
+    <string name="app_name">PEP 2.0</string>
 
     <!-- BEGIN: MainActivity-->
     <string name="button_scanner">Kleurenscanner</string>
-    <string name="button_passport">Passport</string>
+    <string name="button_passport">Paspoort</string>
     <string name="button_settings">Instellingen</string>
+    <string name="button_overig">(Community)</string>
     <!-- END: MainActivity-->
 
     <!-- BEGIN: PassportActivity-->

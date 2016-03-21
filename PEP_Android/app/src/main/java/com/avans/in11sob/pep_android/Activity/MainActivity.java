@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.overig:
+                intent = new Intent(this, OverigActivity.class);
+                startActivity(intent);
             default:
                 break;
         }

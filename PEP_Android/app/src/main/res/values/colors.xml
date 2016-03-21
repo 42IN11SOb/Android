@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--<color name="yellowColor">#FFD500</color>-->
+    <!--<color name="lightGreyColor">#ECECEC</color>-->
+    <!--<color name="blackColor">#000000</color>-->
+    <!--<color name="whiteColor">#FFFFFF</color>-->
+    <!--<color name="greyColor">#434343</color>-->
+    <color name="black">#000000</color>
+    <color name="navBarDarkColor">#D9B500</color>
+    <color name="navBarColor">#FFD500</color>
+    <color name="highlightColor">#FFD500</color>
+    <color name="textOddColor">#FFD500</color>
+    <color name="textEvenColor">#000000</color>
+    <color name="buttonOddColor">#000000</color>
+    <color name="buttonEvenColor">#FFD500</color>
+
+    <color name="panelColor">#FFFFFF</color>
+    <color name="backgroundColor">#ECECEC</color>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!-- BEGIN: Mainactivity-->
-    <color name="mainBackground">#38464A</color>
-
-    <color name="button_scanner">#626B6E</color>
-    <color name="button_passport">#B0CDD6</color>
-    <color name="button_settings">#626B6E</color>
-    <!-- END: Mainactivity-->
-
-    <!-- BEGIN: Passportactivity-->
-    <color name="button_stijl">#626B6E</color>
-    <color name="button_kleurenPalet">#B0CDD6</color>
-    <!-- END: Passportactivity-->
 </resources>
