@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,47 +11,201 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.MainActivity"
-    android:weightSum="1"
-    >
+    android:weightSum="1">
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/scanner"
+        android:layout_height="150dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/buttonOddColor"
-        android:text="@string/button_scanner"
-        android:textSize="20sp"
-        android:textColor="@color/textOddColor"
         android:onClick="buttonClick"
-        android:layout_weight="0.25" />
-    <Button
+        card_view:cardBackgroundColor="@color/panelColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="0dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/navBarColor" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/scannerImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/scan_icon"/>
+
+                <TextView
+                    android:id="@+id/scannerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/scannerImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="Scanner"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/scannerImage"
+                    android:layout_below="@+id/scannerTitle"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:text="Uw persoonlijke assistent bij het herkennen van de kleur."
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:id="@+id/passport"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/scanner"
+        android:layout_height="150dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/buttonEvenColor"
-        android:text="@string/button_passport"
-        android:textSize="20sp"
-        android:textColor="@color/textEvenColor"
         android:onClick="buttonClick"
-        android:layout_weight="0.25" />
-    <Button
-        android:id="@+id/settings"
+        card_view:cardBackgroundColor="@color/panelColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="0dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/navBarColor" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/passportImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/pass_icon"/>
+
+                <TextView
+                    android:id="@+id/passportTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/passportImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="Passport"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/passportImage"
+                    android:layout_below="@+id/passportTitle"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:text="Uw persoonlijke kleding passport."
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/buttonOddColor"
-        android:text="@string/button_settings"
-        android:textSize="20sp"
-        android:textColor="@color/textOddColor"
-        android:onClick="buttonClick"
-        android:layout_weight="0.25" />
-    <Button
-        android:id="@+id/overig"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/buttonEvenColor"
-        android:text="@string/button_overig"
-        android:textSize="20sp"
-        android:textColor="@color/textEvenColor"
-        android:onClick="buttonClick"
-        android:layout_weight="0.25" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/passport"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/settings"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="buttonClick"
+            card_view:cardBackgroundColor="@color/panelColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="0dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/navBarColor" />
+
+                <ImageView
+                    android:id="@+id/settingsImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:src="@drawable/settings_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="Instellingen"
+                    android:textColor="@color/buttonOddColor"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/overig"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="150dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="buttonClick"
+            card_view:cardBackgroundColor="@color/panelColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="0dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/navBarColor" />
+
+                <ImageView
+                    android:id="@+id/overigImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:src="@drawable/more_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="Overige"
+                    android:textColor="@color/buttonOddColor"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 </LinearLayout>

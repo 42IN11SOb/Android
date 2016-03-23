@@ -8,23 +8,8 @@
     tools:context=".Activity.SplashActivity"
     android:weightSum="1">
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/editText"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="SPLASH, WHOOOSHHH~~" />-->
-    <!--<ImageView-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:src="@drawable/splash" />-->
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/splashTopLeftCorner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,16 +19,16 @@
         android:src="@drawable/splash_topleftcorner"/>
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/splashTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/splashTopLeftCorner"
         android:layout_centerHorizontal="true"
         android:contentDescription="splashTitle"
         android:src="@drawable/splash_title"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/splashBottomRightCorner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
