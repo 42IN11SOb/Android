@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">PEP 2.0</string>
 
+    <!-- BEGIN: LoginActivity-->
+    <string name="username">Naam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="loginButton">Inloggen</string>
+    <string name="guestButton">Doorgaan zonder inloggen</string>
+    <!-- END: LoginActivity-->
+
     <!-- BEGIN: MainActivity-->
     <string name="button_scanner">Kleurenscanner</string>
     <string name="button_passport">Paspoort</string>
@@ -14,10 +21,10 @@
     <!-- END: PassportActivity-->
 
     <!-- BEGIN: ScannerActivity-->
-    <string name="btnIntend">Take (big) Picture</string>
-    <string name="btnIntendS">Take (small) Picture</string>
-    <string name="btnIntendV">Take Video</string>
-    <string name="cannot">Cannot</string>
-    <string name="album_name">CameraSample</string>
+    <!--<string name="btnIntend">Take (big) Picture</string>-->
+    <!--<string name="btnIntendS">Take (small) Picture</string>-->
+    <!--<string name="btnIntendV">Take Video</string>-->
+    <!--<string name="cannot">Cannot</string>-->
+    <!--<string name="album_name">CameraSample</string>-->
     <!-- END: ScannerActivity-->
 </resources>
