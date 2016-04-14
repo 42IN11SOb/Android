@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".Activity.SplashActivity"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/splashTopLeftCorner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="splashTopLeftCorner"
+        android:src="@drawable/splash_topleftcorner"/>
+
+    <ImageView
+        android:id="@+id/splashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splashTopLeftCorner"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="splashTitle"
+        android:src="@drawable/splash_title"/>
+
+    <ImageView
+        android:id="@+id/splashBottomRightCorner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="splashBottomRightCorner"
+        android:src="@drawable/splash_bottomrightcorner"/>
+
+
+</RelativeLayout>

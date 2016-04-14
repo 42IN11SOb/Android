@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activity.PassportActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/stijl"
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:onClick="buttonClick"
+        card_view:cardBackgroundColor="@color/panelColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="0dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/navBarColor" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/stijlImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp" />
+                    <!--android:src="@drawable/scan_icon"/>-->
+
+                <TextView
+                    android:id="@+id/stijlTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/stijlImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="Stijl"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/stijlImage"
+                    android:layout_below="@+id/stijlTitle"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:text="Uw persoonlijke persoonlijk samengestelde stylings informatie."
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/kleurenPalet"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/stijl"
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:onClick="buttonClick"
+        card_view:cardBackgroundColor="@color/panelColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="0dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/navBarColor" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/kleurenPaletImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp" />
+                    <!--android:src="@drawable/pass_icon"/>-->
+
+                <TextView
+                    android:id="@+id/kleurenPaletTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/kleurenPaletImage"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="Kleur palet"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/kleurenPaletImage"
+                    android:layout_below="@+id/kleurenPaletTitle"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:text="Uw collectie van samengestelde kleuren."
+                    android:textSize="12sp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
