@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--<color name="yellowColor">#FFD500</color>-->
+    <!--<color name="lightGreyColor">#ECECEC</color>-->
+    <!--<color name="blackColor">#000000</color>-->
+    <!--<color name="whiteColor">#FFFFFF</color>-->
+    <!--<color name="greyColor">#434343</color>-->
+    <color name="black">#000000</color>
+    <color name="navBarDarkColor">#D9B500</color>
+    <color name="navBarColor">#FFD500</color>
+    <color name="highlightColor">#FFD500</color>
+    <color name="textOddColor">#FFD500</color>
+    <color name="textEvenColor">#000000</color>
+    <color name="buttonOddColor">#000000</color>
+    <color name="buttonEvenColor">#FFD500</color>
+
+    <color name="panelColor">#FFFFFF</color>
+    <color name="backgroundColor">#434343</color>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
 </resources>
