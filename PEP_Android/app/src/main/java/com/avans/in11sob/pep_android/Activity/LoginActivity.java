@@ -110,11 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             mAuthTask = new UserLogin(username, password);
             mAuthTask.execute((Void) null);
-            if(mAuthTask.loggedin)
-            {
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
+
         }
     }
 
@@ -190,6 +186,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if(succes) {
                 // save user info
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 finish();
             } else {
                 mUsernameView.setError("");
