@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (view.getId()){
             case R.id.scanner:
-                intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, ScannerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.passport:

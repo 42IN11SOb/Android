@@ -1,5 +1,7 @@
 package com.avans.in11sob.pep_android.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -14,22 +16,26 @@ import android.widget.Toast;
 
 import com.avans.in11sob.pep_android.R;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "test", "test"
-    };
+//    private static final String[] DUMMY_CREDENTIALS = new String[]{
+//            "test", "test"
+//    };
 
     private EditText mUsernameView;
     private EditText mPasswordView;
@@ -42,11 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mUsernameView = (EditText) findViewById(R.id.loginUsername);
-
         mPasswordView = (EditText) findViewById(R.id.loginPassword);
-
-//        UserLogin mLogin = new UserLogin();
-//        mLogin.execute();
 
         Button mLoginButton = (Button) findViewById(R.id.loginButton);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +71,9 @@ public class LoginActivity extends AppCompatActivity {
     Intent intent;
     private void skipLogin() {
         Toast.makeText(LoginActivity.this, "Skipping login", Toast.LENGTH_SHORT).show();
-        intent = new Intent(this, PassportActivity.class);
+        intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
 
     private void attemptLogin() {
         if(mAuthTask != null) {
@@ -109,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             mAuthTask = new UserLogin(username, password);
             mAuthTask.execute((Void) null);
+            if(mAuthTask.loggedin)
+            {
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -119,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     public class UserLogin extends AsyncTask<Void, Void, Boolean> {
@@ -127,7 +133,8 @@ public class LoginActivity extends AppCompatActivity {
         private final String password;
         private final String baseURL = "http://bartimeus-temp.herokuapp.com";
         private final String loginExtention = "/users/login";
-
+        private Boolean loggedin = false;
+        private String token = "";
 
         UserLogin(String username, String password) {
             this.username = username;
@@ -139,63 +146,55 @@ public class LoginActivity extends AppCompatActivity {
             // TODO: attempt authentication againt API
 
             try {
-                Log.e("HOI", "kom ik heir");
-                // Simulate network access.
-//                Thread.sleep(2000);
                 URL url = new URL(baseURL + loginExtention);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                String urlParams = "?username=" + username + "&password=" + password;
+                String urlParams = "username=" + username + "&password=" + password;
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//                conn.setDoInput(true);
+
+                conn.setFixedLengthStreamingMode(urlParams.getBytes().length);
+                conn.setRequestProperty("Content-Language", "en-US");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setConnectTimeout(15000);
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
                 conn.setDoOutput(true);
-                Log.e("HOI", "kom ik heir2");
-                DataOutputStream dStream = new DataOutputStream(conn.getOutputStream());
-                dStream.writeBytes(urlParams);
-                dStream.flush();
-                dStream.close();
-                int responseCode = conn.getResponseCode();
-                Log.e("HOI", "kom ik heir3");
-//                final StringBuilder output = new StringBuilder("Request URL " + url);
-                String output = "Request URL " + url;
-//                output.append(System.getProperty("line.separator") + "Request Parameters " + urlParams);
-                output += System.getProperty("line.separator") + "Request Parameters " + urlParams;
-//                output.append(System.getProperty("line.separator") + "Response Code " + responseCode);
-                Log.e("HOI", "kom ik heir4");
-                output += System.getProperty("line.separator") + "Response Code " + responseCode;
-//                output.append(System.getProperty("line.separator") + "Type " + "POST");
-//                output += System.getProperty("line.separator") + "Type " + "POST";
-                Log.e("HOI", "kom ik heir4");
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                Log.e("HOI", "kom ik heir4");
 
-                String line = "";
-                Log.e("HOI", "kom ik heir5");
-                StringBuilder responseOutput = new StringBuilder();
-                System.out.println("Output=====================" + br);
-                while((line = br.readLine()) != null) {
-                    responseOutput.append(line);
+                // SEND REQUEST:
+                PrintWriter out = new PrintWriter(conn.getOutputStream());
+                out.write(urlParams);
+                out.close();
+
+                Scanner instream = new Scanner(conn.getInputStream());
+                String response = "";
+                while (instream.hasNextLine()) {
+                    response += (instream.nextLine());
                 }
-                Log.e("HOI", "kom ik heir6");
-                br.close();
-                Log.e("HOI", "kom ik heir7");
-                output += System.getProperty("line.separator") + "Response " + System.getProperty("line.separator") + System.getProperty("line.separator") + responseOutput.toString();
+                Log.d("LOGINACTIVITY", "doInBackground " + response);
+                JSONObject json = new JSONObject(response);
+                loggedin = json.getBoolean("success");
+                Log.d("Check", "" +loggedin);
+                token = json.getString("token");
+                Log.d("Check", token);
 
-                System.out.println(output);
-
-//                Toast.makeText(LoginActivity.this, "Redirecting...", Toast.LENGTH_SHORT);
-
-                Log.e("HOI", "kom ik heir8");
-//                Toast.makeText(LoginActivity.this, "Wrong username/password", Toast.LENGTH_SHORT);
-
+                conn.disconnect();
+                return loggedin;
             } catch (Exception e) {
                 Log.e("Login", "Failed to send HTTP GET request.");
-                Toast.makeText(LoginActivity.this, "Failed to send HTTP GET request", Toast.LENGTH_SHORT).show();
                 return false;
             }
+        }
 
-            // TODO: give wrong username/password message
-            return true;
+        protected void onPostExecute(final Boolean succes) {
+            mAuthTask = null;
+
+            if(succes) {
+                // save user info
+                finish();
+            } else {
+                mUsernameView.setError("");
+                mPasswordView.setError("");
+            }
         }
 
     }
