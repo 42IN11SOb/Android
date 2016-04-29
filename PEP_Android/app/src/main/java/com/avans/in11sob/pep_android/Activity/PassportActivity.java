@@ -23,7 +23,7 @@ public class PassportActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.kleurenPalet:
-                intent = new Intent(this, KleurenPaletActivity.class);
+                intent = new Intent(this, ColorMasterActivity.class);
                 startActivity(intent);
                 break;
             default:

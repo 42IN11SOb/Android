@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.avans.in11sob.pep_android.R;
 
@@ -37,4 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast toast = Toast.makeText(MainActivity.this, "Press once again to exit!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        back_pressed = System.currentTimeMillis();
+    }
+
 }
