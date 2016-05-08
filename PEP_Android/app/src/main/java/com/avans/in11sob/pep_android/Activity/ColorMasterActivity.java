@@ -19,7 +19,6 @@ public class ColorMasterActivity extends AppCompatActivity implements ColorMaste
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_master);
-
     }
 
     @Override
@@ -38,5 +37,4 @@ public class ColorMasterActivity extends AppCompatActivity implements ColorMaste
             startActivity(intent);
         }
     }
-
 }
