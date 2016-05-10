@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.avans.in11sob.pep_android.Adapter.ColorListAdapter;
+import com.avans.in11sob.pep_android.Model.Profile;
 import com.avans.in11sob.pep_android.Model.ProfileColor;
 import com.avans.in11sob.pep_android.Model.User;
 import com.avans.in11sob.pep_android.R;
@@ -108,6 +109,8 @@ public class ColorMasterFragment extends Fragment {
     }
 
     public void loadData(){
-        colors = ProfileColor.getColors();
+//        colors = ProfileColor.getColors(); // old way to get static colors
+        Profile profile = Profile.getInstance();
+        colors = profile.getColors();
     }
 }

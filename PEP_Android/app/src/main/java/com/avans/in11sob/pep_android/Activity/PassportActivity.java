@@ -1,29 +1,27 @@
 package com.avans.in11sob.pep_android.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.avans.in11sob.pep_android.Model.Profile;
+import com.avans.in11sob.pep_android.Model.ProfileColor;
+import com.avans.in11sob.pep_android.Model.ProfileStyle;
 import com.avans.in11sob.pep_android.R;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
 public class PassportActivity extends AppCompatActivity {
 
@@ -70,8 +68,6 @@ public class PassportActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            InputStream is = null;
-            Gson gson = new Gson();
 
             try {
                 URL url = new URL(baseURL + URLExtention + token);
@@ -82,24 +78,54 @@ public class PassportActivity extends AppCompatActivity {
                 conn.setDoInput(true);
 
                 conn.connect();
-                int response = conn.getResponseCode();
-                is = conn.getInputStream();
-
-                BufferedReader bR = new BufferedReader(  new InputStreamReader(is));
-                String line = "";
-                StringBuilder sb = new StringBuilder();
-
-                while((line =  bR.readLine()) != null){
-                    sb.append(line);
-                    Log.e("StijlActivity:", line);
-
+                int responseCode = conn.getResponseCode();
+                Scanner instream = new Scanner(conn.getInputStream());
+                String response = "";
+                while (instream.hasNextLine()) {
+                    response += (instream.nextLine());
                 }
-                is.close();
+                Log.e("Passport", response);
 
-                JSONObject obj =  new JSONObject(sb.toString());
-//                gson = gson.fromJson(responseStrBuilder); /*json result*/
+                Profile mProfile = Profile.getInstance();
+                JSONObject json = new JSONObject(response);
+                JSONObject jsonData = new JSONObject(json.getString("data"));
+                JSONObject jsonPassport = new JSONObject(jsonData.getString("passport"));
+                JSONObject jsonSeason = new JSONObject(jsonPassport.getString("season"));
+                JSONObject jsonFigure = new JSONObject(jsonPassport.getString("figure"));
 
+                String seasonName = jsonSeason.getString("name");
+                mProfile.setSeason(seasonName);
+                JSONArray seasonColors = jsonSeason.getJSONArray("colors");
 
+                for(int i = 0; i < seasonColors.length(); i++) {
+                    JSONObject colorsColor = seasonColors.getJSONObject(i);
+                    JSONObject colorsColor1 = colorsColor.getJSONObject("color");
+                    String colorId = colorsColor1.getString("_id");
+                    Integer colorB = colorsColor1.getInt("b");
+                    Integer colorG = colorsColor1.getInt("g");
+                    Integer colorR = colorsColor1.getInt("r");
+                    String colorName = colorsColor1.getString("name");
+                    ProfileColor mColor = new ProfileColor(colorId, colorName, colorR, colorG, colorB);
+                    mProfile.addColor(mColor);
+                }
+//                Log.e("check", "does this go through");
+
+                ProfileStyle mStyle = new ProfileStyle();
+                String figureTitle = jsonFigure.getString("title");
+                mStyle.setTitle(figureTitle);
+                String figureAdvice = jsonFigure.getString("advice");
+                mStyle.setAdvice(figureAdvice);
+                String figureInfo = jsonFigure.getString("info");
+                mStyle.setInfo(figureInfo);
+                JSONArray figureDonts = jsonFigure.getJSONArray("donts");
+                for(int i = 0; i < figureDonts.length(); i++) {
+                    mStyle.addDonts(figureDonts.getString(i));
+                }
+                JSONArray figureDos = jsonFigure.getJSONArray("dos");
+                for(int i = 0; i < figureDos.length(); i++) {
+                    mStyle.addDonts(figureDos.getString(i));
+                }
+                mProfile.addStyle(mStyle);
 
                 return true;
             } catch (Exception e) {

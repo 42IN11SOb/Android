@@ -1,5 +1,6 @@
 package com.avans.in11sob.pep_android.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,12 +8,25 @@ import java.util.List;
  */
 public class Profile {
 
+    private static Profile instance;
+
+    public static Profile getInstance()
+    {
+        if (instance == null)
+        {
+            // Create the instance
+            instance = new Profile();
+        }
+        // Return the instance
+        return instance;
+    }
+
     ProfileStyle profileStyle;
     String seasonName;
-    List<ProfileColor> profileColors;
+    ArrayList<ProfileColor> profileColors;
 
     public Profile() {
-
+        profileColors = new ArrayList<ProfileColor>();
     }
 
     public void addColor(ProfileColor color) {
