@@ -38,8 +38,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="50dp"
                     android:layout_width="75dp"
-                    android:layout_height="75dp" />
-                    <!--android:src="@drawable/scan_icon"/>-->
+                    android:layout_height="75dp"
+                    android:src="@drawable/style_icon"/>
 
                 <TextView
                     android:id="@+id/stijlTitle"
@@ -96,8 +96,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="50dp"
                     android:layout_width="75dp"
-                    android:layout_height="75dp" />
-                    <!--android:src="@drawable/pass_icon"/>-->
+                    android:layout_height="75dp"
+                    android:src="@drawable/color_icon"/>
 
                 <TextView
                     android:id="@+id/kleurenPaletTitle"

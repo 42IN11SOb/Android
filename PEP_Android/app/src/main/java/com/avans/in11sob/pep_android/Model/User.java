@@ -38,4 +38,8 @@ public class User {
         String password = sharedPrefs.getString("password", "");
         String token = sharedPrefs.getString("token", "");
     }
+
+    public String getToken() {
+        return token;
+    }
 }
