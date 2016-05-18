@@ -14,10 +14,8 @@ public class Profile {
     {
         if (instance == null)
         {
-            // Create the instance
             instance = new Profile();
         }
-        // Return the instance
         return instance;
     }
 
@@ -47,5 +45,9 @@ public class Profile {
 
     public void setSeason(String seasonName) {
         this.seasonName = seasonName;
+    }
+
+    public String getSeason() {
+        return seasonName;
     }
 }

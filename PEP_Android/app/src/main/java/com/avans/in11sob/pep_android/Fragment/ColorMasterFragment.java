@@ -72,6 +72,8 @@ public class ColorMasterFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProfileColor c = adapter.getItem(position);
                 listener.onListItemSelected(c);
+                Bundle data = new Bundle();
+                data.putInt("colorPosition", position);
             }
         });
 

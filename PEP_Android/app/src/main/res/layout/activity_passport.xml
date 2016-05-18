@@ -39,7 +39,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/style_icon"/>
+                    android:src="@drawable/person_style_icon"/>
 
                 <TextView
                     android:id="@+id/stijlTitle"
@@ -97,7 +97,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/color_icon"/>
+                    android:src="@drawable/colors_icon"/>
 
                 <TextView
                     android:id="@+id/kleurenPaletTitle"

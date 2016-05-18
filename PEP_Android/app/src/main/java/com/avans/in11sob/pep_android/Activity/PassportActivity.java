@@ -34,7 +34,6 @@ public class PassportActivity extends AppCompatActivity {
 
         Context context = this;
         SharedPreferences sharedPrefs = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-        Log.d("Passport", "Kom ik hier");
         mColorTask = new RequestProfileTask(sharedPrefs.getString("token", ""));
         mColorTask.execute();
     }
@@ -108,7 +107,6 @@ public class PassportActivity extends AppCompatActivity {
                     ProfileColor mColor = new ProfileColor(colorId, colorName, colorR, colorG, colorB);
                     mProfile.addColor(mColor);
                 }
-//                Log.e("check", "does this go through");
 
                 ProfileStyle mStyle = new ProfileStyle();
                 String figureTitle = jsonFigure.getString("title");
@@ -117,13 +115,15 @@ public class PassportActivity extends AppCompatActivity {
                 mStyle.setAdvice(figureAdvice);
                 String figureInfo = jsonFigure.getString("info");
                 mStyle.setInfo(figureInfo);
+                String figureImage = jsonFigure.getString("img");
+                mStyle.setImage(figureImage);
                 JSONArray figureDonts = jsonFigure.getJSONArray("donts");
                 for(int i = 0; i < figureDonts.length(); i++) {
                     mStyle.addDonts(figureDonts.getString(i));
                 }
                 JSONArray figureDos = jsonFigure.getJSONArray("dos");
                 for(int i = 0; i < figureDos.length(); i++) {
-                    mStyle.addDonts(figureDos.getString(i));
+                    mStyle.addDos(figureDos.getString(i));
                 }
                 mProfile.addStyle(mStyle);
 
@@ -139,58 +139,10 @@ public class PassportActivity extends AppCompatActivity {
             mColorTask = null;
 
             if(succes) {
-                // save user colors
-//                User user = new User(getApplicationContext(), username, password, token);
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
+
             } else {
 
             }
         }
     }
-
-//    private String requestColor(String color_url) throws IOException {
-//        InputStream is = null;
-//
-//        try {
-//            URL url = new URL(color_url);
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setReadTimeout(10000 /* milliseconds */);
-//            conn.setConnectTimeout(15000 /* milliseconds */);
-//            conn.setRequestMethod("GET");
-//            conn.setDoInput(true);
-//
-//            // Starts the query
-//            conn.connect();
-//            int response = conn.getResponseCode();
-//            is = conn.getInputStream();
-//
-//
-//            BufferedReader bR = new BufferedReader(  new InputStreamReader(is));
-//            String line = "";
-//            StringBuilder responseStrBuilder = new StringBuilder();
-//            while((line =  bR.readLine()) != null){
-//                responseStrBuilder.append(line);
-//            }
-//            is.close();
-//            // Convert the InputStream into a string
-//            return responseStrBuilder.toString();
-//
-//        } finally {
-//            if (is != null) {
-//                is.close();
-//            }
-//        }
-//    }
-
-//    public boolean isConnected(){
-//        ConnectivityManager connMgr = (ConnectivityManager) this.getSystemService(Activity.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-//        if (networkInfo != null && networkInfo.isConnected())
-//            return true;
-//        else
-//            return false;
-//    }
-
 }
