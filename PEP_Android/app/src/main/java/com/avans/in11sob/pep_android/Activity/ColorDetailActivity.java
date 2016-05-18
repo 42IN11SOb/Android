@@ -29,19 +29,14 @@ public class ColorDetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-
-
             ProfileColor _color = (ProfileColor) extras.getSerializable(COLOR);
             this.color = _color;
-
 
             ColorDetailFragment detailFragment = (ColorDetailFragment) getFragmentManager()
                     .findFragmentById(R.id.detailFragment);
 
             detailFragment.setColor(_color);
             detailFragment.showDetails();
-
         }
-
     }
 }

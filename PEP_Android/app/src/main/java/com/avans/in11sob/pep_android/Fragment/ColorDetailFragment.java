@@ -21,13 +21,11 @@ public class ColorDetailFragment extends Fragment {
     private ProfileColor color;
 
     public ColorDetailFragment() {
-
     }
 
     public static ColorDetailFragment newInstance() {
         return new ColorDetailFragment();
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +48,5 @@ public class ColorDetailFragment extends Fragment {
         TextView background = (TextView) getView().findViewById(R.id.frBackgroundColor);
 //        background.setBackgroundColor(Color.parseColor("#"+color.getCode()));
         background.setBackgroundColor(Color.rgb(color.getRed(), color.getGreen(), color.getBlue()));
-
     }
 }

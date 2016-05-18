@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.avans.in11sob.pep_android.Fragment.ColorDetailFragment;
 import com.avans.in11sob.pep_android.Fragment.ColorMasterFragment;
+import com.avans.in11sob.pep_android.Model.Profile;
 import com.avans.in11sob.pep_android.Model.ProfileColor;
 import com.avans.in11sob.pep_android.R;
 
@@ -19,7 +20,8 @@ public class ColorMasterActivity extends AppCompatActivity implements ColorMaste
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_master);
-
+        Profile pro = Profile.getInstance();
+        this.setTitle(pro.getSeason());
     }
 
     @Override
@@ -38,5 +40,4 @@ public class ColorMasterActivity extends AppCompatActivity implements ColorMaste
             startActivity(intent);
         }
     }
-
 }

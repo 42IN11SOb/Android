@@ -151,11 +151,12 @@ public class LoginActivity extends AppCompatActivity {
                 while (instream.hasNextLine()) {
                     response += (instream.nextLine());
                 }
-                Log.d("LOGINACTIVITY", "doInBackground " + response);
+                Log.d("LOGINACTIVITY", "doInBackground: " + response);
                 JSONObject json = new JSONObject(response);
                 loggedin = json.getBoolean("success");
                 Log.d("Check", "" +loggedin);
-                token = json.getString("token");
+                JSONObject jsonData  = new JSONObject(json.getString("data"));
+                token = jsonData.getString("token");
                 Log.d("Check", token);
 
                 conn.disconnect();
