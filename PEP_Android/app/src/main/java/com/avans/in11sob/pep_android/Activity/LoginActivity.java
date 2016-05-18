@@ -1,8 +1,13 @@
 package com.avans.in11sob.pep_android.Activity;
 
 
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.avans.in11sob.pep_android.Adapter.Authenticator;
 import com.avans.in11sob.pep_android.Model.User;
 import com.avans.in11sob.pep_android.R;
 
@@ -23,15 +29,23 @@ import java.util.Scanner;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String ARG_ACCOUNT_TYPE             = "com.pep_android";
+    public static final String ARG_AUTH_TYPE                = "pepprofile";
+    public static final String ARG_IS_ADDING_NEW_ACCOUNT    = "";
+
     private EditText mUsernameView;
     private EditText mPasswordView;
 
     private UserLogin mAuthTask = null;
 
+    private Authenticator authenticator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        authenticator = new Authenticator(getApplicationContext());
 
         mUsernameView = (EditText) findViewById(R.id.loginUsername);
         mPasswordView = (EditText) findViewById(R.id.loginPassword);
@@ -93,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+
             mAuthTask = new UserLogin(username, password);
             mAuthTask.execute((Void) null);
 
@@ -182,6 +197,5 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
 }
 
