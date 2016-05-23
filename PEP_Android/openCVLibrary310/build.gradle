@@ -5,8 +5,8 @@ android {
     buildToolsVersion "23.0.3" // 19.1.0
 
     defaultConfig {
-        minSdkVersion 23 // 8
-        targetSdkVersion 23 // 21
+        minSdkVersion 21 // 8
+        targetSdkVersion 21 // 21
     }
 
     buildTypes {
