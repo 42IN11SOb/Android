@@ -34,8 +34,11 @@ public class PassportActivity extends AppCompatActivity {
 
         Context context = this;
         SharedPreferences sharedPrefs = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-        mColorTask = new RequestProfileTask(sharedPrefs.getString("token", ""));
-        mColorTask.execute();
+        Profile profile = Profile.getInstance();
+        if (profile.getSeason() == null) {
+            mColorTask = new RequestProfileTask(sharedPrefs.getString("token", ""));
+            mColorTask.execute();
+        }
     }
 
     public void buttonClick(View view){
