@@ -32,8 +32,8 @@ public class PassportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passport);
 
-        Context context = this;
-        SharedPreferences sharedPrefs = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        Context context = getApplicationContext();
+        SharedPreferences sharedPrefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
         mColorTask = new RequestProfileTask(sharedPrefs.getString("token", ""));
         mColorTask.execute();
     }
