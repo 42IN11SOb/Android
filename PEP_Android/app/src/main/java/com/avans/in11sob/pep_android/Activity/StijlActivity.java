@@ -12,8 +12,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.avans.in11sob.pep_android.Model.Profile;
 import com.avans.in11sob.pep_android.R;
+import com.avans.in11sob.pep_android.Utilities.App;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -31,8 +35,32 @@ public class StijlActivity extends AppCompatActivity {
     private void myStyle() {
         Profile profile = Profile.getInstance();
         String imageURL = profile.getStyle().getImage();
-        new DownloadImageTask((ImageView) findViewById(R.id.myStyleImage))
-                .execute(imageURL);
+
+        final ImageView myStyleImage = (ImageView) findViewById(R.id.myStyleImage);
+
+        final ImageRequest imageRequest =
+                new ImageRequest(
+                        imageURL,
+                        new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap bitmap) {
+                                myStyleImage.setImageBitmap(bitmap);
+                            }
+                        },
+                        0,
+                        0,
+                        ImageView.ScaleType.CENTER_INSIDE,
+                        null,
+                        new Response.ErrorListener()
+                        {
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                myStyleImage.setImageResource(R.drawable.splash);
+                            }
+                        }
+                );
+
+        App.getInstance().getVolleyRequestQueue().add(imageRequest);
 
         String adviceTitle = profile.getStyle().getTitle();
         TextView adviceTitleView = (TextView) findViewById(R.id.myAdviceTitle);
@@ -61,31 +89,6 @@ public class StijlActivity extends AppCompatActivity {
         }
         TextView adviceDontsView = (TextView) findViewById(R.id.myAdviceDonts);
         adviceDontsView.setText(_donts);
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
     }
 
 }

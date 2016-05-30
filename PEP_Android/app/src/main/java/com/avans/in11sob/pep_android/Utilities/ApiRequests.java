@@ -7,6 +7,7 @@ import com.android.volley.BuildConfig;
 import com.android.volley.Response;
 import com.avans.in11sob.pep_android.Api.Models.IsLoggedIn;
 import com.avans.in11sob.pep_android.Api.Models.Login;
+import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -38,6 +39,25 @@ public class ApiRequests {
     )
     {
         final String url = "http://projectpep.herokuapp.com/users/loggedin?token=" + token;
+
+        return new GsonGetRequest<>
+                (
+                        url,
+                        new TypeToken<IsLoggedIn>() {}.getType(),
+                        gson,
+                        listener,
+                        errorListener
+                );
+    }
+
+    public static GsonGetRequest<Profile> profileGsonGetRequest
+    (
+            @NonNull final Response.Listener<Profile> listener,
+            @NonNull final Response.ErrorListener errorListener,
+            @NonNull final String token
+    )
+    {
+        final String url = "http://projectpep.herokuapp.com/users/profile?token=" + token;
 
         return new GsonGetRequest<>
                 (

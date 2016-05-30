@@ -19,6 +19,12 @@ public class App extends Application {
     // Volley request queue
     private RequestQueue mRequestQueue;
 
+    // Volley image cache
+    private LruBitmapCache mLruBitmapCache;
+
+    // Volley image loader
+    private ImageLoader mImageLoader;
+
     @Override
     public void onCreate()
     {
@@ -82,5 +88,38 @@ public class App extends Application {
         {
             getInstance().getVolleyRequestQueue().cancelAll(tag);
         }
+    }
+
+    /**
+     * Returns an image loader instance to be used with Volley.
+     *
+     * @return {@link com.android.volley.toolbox.ImageLoader}
+     */
+    public ImageLoader getVolleyImageLoader()
+    {
+        if (mImageLoader == null)
+        {
+            mImageLoader = new ImageLoader
+                    (
+                            getVolleyRequestQueue(),
+                            App.getInstance().getVolleyImageCache()
+                    );
+        }
+
+        return mImageLoader;
+    }
+
+    /**
+     * Returns a bitmap cache to use with volley.
+     *
+     * @return {@link LruBitmapCache}
+     */
+    private LruBitmapCache getVolleyImageCache()
+    {
+        if (mLruBitmapCache == null)
+        {
+            mLruBitmapCache = new LruBitmapCache(sInstance);
+        }
+        return mLruBitmapCache;
     }
 }
