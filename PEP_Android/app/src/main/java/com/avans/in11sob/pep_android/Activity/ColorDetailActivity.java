@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.avans.in11sob.pep_android.Fragment.ColorDetailFragment;
-import com.avans.in11sob.pep_android.Model.ProfileColor;
+import com.avans.in11sob.pep_android.Api.Models.Color;
 import com.avans.in11sob.pep_android.R;
 
 public class ColorDetailActivity extends AppCompatActivity {
@@ -14,7 +14,7 @@ public class ColorDetailActivity extends AppCompatActivity {
     public static final String COLOR = "color";
     ColorDetailFragment fragmentColorDetail;
 
-    private ProfileColor color;
+    private Color color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,9 @@ public class ColorDetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            ProfileColor _color = (ProfileColor) extras.getSerializable(COLOR);
+            Color _color = (Color) extras.getSerializable(COLOR);
             this.color = _color;
+            this.setTitle(color.color.name);
 
             ColorDetailFragment detailFragment = (ColorDetailFragment) getFragmentManager()
                     .findFragmentById(R.id.detailFragment);

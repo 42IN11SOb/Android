@@ -50,7 +50,7 @@ public class ApiRequests {
                 );
     }
 
-    public static GsonGetRequest<Profile> profileGsonGetRequest
+    public static GsonGetRequest<Profile> profile
     (
             @NonNull final Response.Listener<Profile> listener,
             @NonNull final Response.ErrorListener errorListener,
@@ -62,7 +62,7 @@ public class ApiRequests {
         return new GsonGetRequest<>
                 (
                         url,
-                        new TypeToken<IsLoggedIn>() {}.getType(),
+                        new TypeToken<Profile>() {}.getType(),
                         gson,
                         listener,
                         errorListener

@@ -1,16 +1,41 @@
 package com.avans.in11sob.pep_android.Api.Models;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mark on 29-5-2016.
  */
-public class Profile implements Serializable {
+public class Profile implements Serializable{
+
+    private static Profile instance;
+
+    public static Profile getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Profile();
+        }
+        return instance;
+    }
+
+    public static Profile getInstance(Profile profile)
+    {
+        if (instance == null)
+        {
+            instance = profile;
+        }
+        return instance;
+    }
+
+    public Profile()
+    {
+        getInstance(this);
+    }
+
     public boolean success;
     public Data data;
 
@@ -46,17 +71,7 @@ public class Profile implements Serializable {
                 @SerializedName("_id")
                 public String id;
                 public String name;
-                public List<Color> colors;
-
-                public class Color
-                {
-                    @SerializedName("_id")
-                    public String id;
-                    public String name;
-                    public int r;
-                    public int g;
-                    public int b;
-                }
+                public ArrayList<Color> colors = new ArrayList<>();
             }
 
             public class Figure

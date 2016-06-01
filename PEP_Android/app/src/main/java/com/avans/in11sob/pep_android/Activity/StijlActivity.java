@@ -15,12 +15,13 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.avans.in11sob.pep_android.Model.Profile;
+import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.avans.in11sob.pep_android.R;
 import com.avans.in11sob.pep_android.Utilities.App;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StijlActivity extends AppCompatActivity {
 
@@ -34,13 +35,12 @@ public class StijlActivity extends AppCompatActivity {
 
     private void myStyle() {
         Profile profile = Profile.getInstance();
-        String imageURL = profile.getStyle().getImage();
 
         final ImageView myStyleImage = (ImageView) findViewById(R.id.myStyleImage);
 
         final ImageRequest imageRequest =
                 new ImageRequest(
-                        imageURL,
+                        profile.data.passport.figure.img,
                         new Response.Listener<Bitmap>() {
                             @Override
                             public void onResponse(Bitmap bitmap) {
@@ -62,19 +62,16 @@ public class StijlActivity extends AppCompatActivity {
 
         App.getInstance().getVolleyRequestQueue().add(imageRequest);
 
-        String adviceTitle = profile.getStyle().getTitle();
         TextView adviceTitleView = (TextView) findViewById(R.id.myAdviceTitle);
-        adviceTitleView.setText(adviceTitle);
+        adviceTitleView.setText(profile.data.passport.season.name);
 
-        String adviceInfo = profile.getStyle().getInfo();
         TextView adviceInfoView = (TextView) findViewById(R.id.myAdviceInfo);
-        adviceInfoView.setText(adviceInfo);
+        adviceInfoView.setText(profile.data.passport.figure.info);
 
-        String adviceText = profile.getStyle().getAdvice();
         TextView adviceTextView = (TextView) findViewById(R.id.myAdviceText);
-        adviceTextView.setText(adviceText);
+        adviceTextView.setText(profile.data.passport.figure.advice);
 
-        ArrayList<String> adviceDos = profile.getStyle().getDos();
+        ArrayList<String> adviceDos = new ArrayList<>(profile.data.passport.figure.dos);
         String _dos = "";
         for (String _do : adviceDos) {
             _dos = _dos + "- " + _do + "\n";
@@ -82,7 +79,7 @@ public class StijlActivity extends AppCompatActivity {
         TextView adviceDosView = (TextView) findViewById(R.id.myAdviceDos);
         adviceDosView.setText(_dos);
 
-        ArrayList<String> adviceDonts = profile.getStyle().getDonts();
+        ArrayList<String> adviceDonts = new ArrayList<>(profile.data.passport.figure.donts);
         String _donts = "";
         for (String _dont : adviceDonts) {
             _donts = _donts + "- " + _dont + "\n";
