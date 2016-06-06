@@ -1,9 +1,10 @@
 package com.avans.in11sob.pep_android.Activity;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,22 +12,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.avans.in11sob.pep_android.Api.Models.Login;
 import com.avans.in11sob.pep_android.Model.User;
 import com.avans.in11sob.pep_android.R;
+import com.avans.in11sob.pep_android.Utilities.ApiRequests;
+import com.avans.in11sob.pep_android.Utilities.App;
+import com.avans.in11sob.pep_android.Utilities.GsonPostRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
+import java.io.Serializable;
 
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
-
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private EditText mUsernameView;
     private EditText mPasswordView;
 
-    private UserLogin mAuthTask = null;
+    private boolean loginBusy = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        if(mAuthTask != null) {
+        if (loginBusy)
             return;
-        }
+        loginBusy = true;
         mUsernameView.setError(null);
         mPasswordView.setError(null);
 
@@ -90,12 +96,43 @@ public class LoginActivity extends AppCompatActivity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            loginBusy = false;
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            mAuthTask = new UserLogin(username, password);
-            mAuthTask.execute((Void) null);
 
+            final GsonPostRequest<Login> gsonPostRequest =
+                    ApiRequests.login(
+                            new Response.Listener<Login>() {
+                                @Override
+                                public void onResponse(Login response) {
+
+                                    SharedPreferences settings = getApplicationContext().getSharedPreferences("auth", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = settings.edit();
+
+                                    editor.putString("token", response.data.token);
+                                    editor.commit();
+                                    Log.e("Token", "Token submitted: " + response.data.token);
+
+                                    //User user = new User(getApplicationContext(), username, password, token);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.e("LoginActivity", "On error triggered for some reason");
+                                    mUsernameView.setError("");
+                                    mPasswordView.setError("");
+                                }
+                            },
+                            username,
+                            password
+                    );
+
+            App.addRequest(gsonPostRequest, "Login");
         }
     }
 
@@ -109,80 +146,11 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() > 3;
     }
 
-    public class UserLogin extends AsyncTask<Void, Void, Boolean> {
-        private final String username;
-        private final String password;
-        private final String baseURL = "http://projectpep.herokuapp.com";
-        private final String loginExtention = "/users/login";
-        private Boolean loggedin = false;
-        private String token = "";
+    public static void startIntent(Context c)
+    {
+        Intent intent = new Intent(c, LoginActivity.class);
 
-        UserLogin(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication againt API
-
-            try {
-                URL url = new URL(baseURL + loginExtention);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                String urlParams = "username=" + username + "&password=" + password;
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-                conn.setFixedLengthStreamingMode(urlParams.getBytes().length);
-                conn.setRequestProperty("Content-Language", "en-US");
-                conn.setRequestProperty("Accept", "application/json");
-                conn.setConnectTimeout(15000);
-                conn.setUseCaches(false);
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                // SEND REQUEST:
-                PrintWriter out = new PrintWriter(conn.getOutputStream());
-                out.write(urlParams);
-                out.close();
-
-                Scanner instream = new Scanner(conn.getInputStream());
-                String response = "";
-                while (instream.hasNextLine()) {
-                    response += (instream.nextLine());
-                }
-                Log.d("LOGINACTIVITY", "doInBackground: " + response);
-                JSONObject json = new JSONObject(response);
-                loggedin = json.getBoolean("success");
-                Log.d("Check", "" +loggedin);
-                JSONObject jsonData  = new JSONObject(json.getString("data"));
-                token = jsonData.getString("token");
-                Log.d("Check", token);
-
-                conn.disconnect();
-                return loggedin;
-            } catch (Exception e) {
-                Log.e("Login", "Failed to send HTTP GET request.");
-                return false;
-            }
-        }
-
-        protected void onPostExecute(final Boolean succes) {
-            mAuthTask = null;
-
-            if(succes) {
-                // save user info
-                User user = new User(getApplicationContext(), username, password, token);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                mUsernameView.setError("");
-                mPasswordView.setError("");
-            }
-        }
-
+        c.startActivity(intent);
     }
-
 }
 

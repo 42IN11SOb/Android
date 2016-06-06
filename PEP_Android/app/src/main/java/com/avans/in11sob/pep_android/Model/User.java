@@ -24,7 +24,7 @@ public class User {
         this.password = _password;
         this.token = _token;
 
-        sharedPrefs = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        sharedPrefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString("username", username);
         editor.putString("password", password);
