@@ -30,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, PassportActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.news:
+                intent = new Intent(this, NewsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.settings:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.overig:
-                intent = new Intent(this, NewsActivity.class);
+                intent = new Intent(this, OverigActivity.class);
                 startActivity(intent);
             default:
                 break;
