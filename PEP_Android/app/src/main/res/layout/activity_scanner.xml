@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_margin="15dp"
         android:id="@+id/scannerCameraView"
-        opencv:show_fps="true"
+        opencv:show_fps="false"
         opencv:camera_id="back">
     </org.opencv.android.JavaCameraView>
 </LinearLayout>

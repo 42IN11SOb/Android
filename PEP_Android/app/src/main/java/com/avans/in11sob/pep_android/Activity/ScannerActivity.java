@@ -3,10 +3,8 @@ package com.avans.in11sob.pep_android.Activity;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
@@ -56,7 +54,6 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
         setContentView(R.layout.activity_scanner);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         mOpenCvCameraView = (JavaCameraView) findViewById(R.id.scannerCameraView);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
@@ -91,10 +88,10 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     }
 
     Mat newMat;
-    Map<Double, Double>rowCol = new HashMap<Double, Double>();
+//    Map<Double, Double>rowCol = new HashMap<Double, Double>();
     @Override
     public void onCameraViewStarted(int width, int height) {
-        Log.e("BREEDTE:: ", String.valueOf(width));Log.e("HOOGTE:: ",String.valueOf(height));
+//        Log.e("BREEDTE:: ", String.valueOf(width));Log.e("HOOGTE:: ",String.valueOf(height));
         WindowWidth = width;
         WindowHeight = height;
         // TL   TC  TR
@@ -152,20 +149,24 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     }
 
     public void compareColor(int R, int G, int B) {
-        mColorView.setBackgroundColor(android.graphics.Color.rgb(R, G, B)); // crashed by setten
+        final int Rc = R;
+        final int Gc = G;
+        final int Bc = B;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mColorView.setBackgroundColor(android.graphics.Color.rgb(Rc, Gc, Bc)); //
+            }
+        });
         // get profilecolors
         int margin = 30;
         for (Color rgb : pro.data.passport.season.colors) {
-//            if(((rgb.color.r - R) <= margin) || ((R - rgb.color.r) <= -margin)) {
             if(rgb.color.r > (R - margin) && rgb.color.r < (R + margin) &&
                     rgb.color.g > (G - margin) && rgb.color.g < (G + margin) &&
                     rgb.color.b > (B - margin) && rgb.color.b < (B + margin)) {
                 Log.e("SUCCESS", "YOU HAVE FOUND A COLOUR " + rgb.color.name);
                 return;
             }
-//            rgb.color.r = R
-//            rgb.color.g = G
-//            rgb.color.b = B
         }
     }
 }
