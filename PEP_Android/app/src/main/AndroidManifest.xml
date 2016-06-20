@@ -67,8 +67,9 @@
             android:configChanges="orientation"
             android:noHistory="true"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.NewsActivity" />
-        <activity android:name=".Activity.IntroductionActivity"></activity>
+        <activity android:name=".Activity.NewscollectionActivity" />
+        <activity android:name=".Activity.IntroductionActivity" />
+        <activity android:name=".Activity.NewsActivity"></activity>
     </application>
 
 </manifest>

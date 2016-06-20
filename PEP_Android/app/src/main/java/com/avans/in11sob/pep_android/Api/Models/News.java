@@ -1,5 +1,7 @@
 package com.avans.in11sob.pep_android.Api.Models;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

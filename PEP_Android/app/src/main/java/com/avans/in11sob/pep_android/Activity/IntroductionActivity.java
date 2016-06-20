@@ -20,7 +20,7 @@ public class IntroductionActivity extends AppCompatActivity {
         Intent intent;
         switch (view.getId()){
             case R.id.nonVisitedPEP:
-                intent = new Intent(this, NewsActivity.class);
+                intent = new Intent(this, NewscollectionActivity.class);
                 startActivity(intent);
                 break;
             case R.id.visitedPEP:
