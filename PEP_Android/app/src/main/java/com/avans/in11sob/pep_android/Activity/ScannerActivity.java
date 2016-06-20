@@ -3,10 +3,13 @@ package com.avans.in11sob.pep_android.Activity;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
+import com.avans.in11sob.pep_android.Api.Models.Profile;
+import com.avans.in11sob.pep_android.Api.Models.Color;
 import com.avans.in11sob.pep_android.R;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
@@ -23,6 +26,8 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     private final static String TAG = "PEP::Scanner";
     private static int WindowWidth;
     private static int WindowHeight;
+    Profile pro = Profile.getInstance();
+    public CardView mCardView;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -53,6 +58,7 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView = (JavaCameraView) findViewById(R.id.scannerCameraView);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
+        mCardView = (CardView) findViewById(R.id.stijl);
     }
 
     public void onResume() {
@@ -143,6 +149,20 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     }
 
     public void compareColor(int R, int G, int B) {
-
+//        mCardView.setBackgroundColor(android.graphics.Color.rgb(R, G, B)); // crashed by setten
+        // get profilecolors
+        int margin = 30;
+        for (Color rgb : pro.data.passport.season.colors) {
+//            if(((rgb.color.r - R) <= margin) || ((R - rgb.color.r) <= -margin)) {
+            if(rgb.color.r > (R - margin) && rgb.color.r < (R + margin) &&
+                    rgb.color.g > (G - margin) && rgb.color.g < (G + margin) &&
+                    rgb.color.b > (B - margin) && rgb.color.b < (B + margin)) {
+                Log.e("SUCCESS", "YOU HAVE FOUND A COLOUR " + rgb.color.name);
+                return;
+            }
+//            rgb.color.r = R
+//            rgb.color.g = G
+//            rgb.color.b = B
+        }
     }
 }
