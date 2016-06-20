@@ -11,7 +11,6 @@
         android:layout_gravity="center_vertical"
         android:focusable="false"
         android:text="Kleur naam"
-        android:background="@color/colorAccent"
-        />
+        android:background="@color/colorAccent"/>
 
 </LinearLayout>
