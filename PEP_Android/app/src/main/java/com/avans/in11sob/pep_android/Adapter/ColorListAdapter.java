@@ -52,7 +52,7 @@ public class ColorListAdapter extends BaseAdapter {
         }
 
         TextView color = (TextView) row.findViewById(R.id.colorButton);
-        color.setText(results.get(position).color.name);
+//        color.setText(results.get(position).color.name);
         color.setBackgroundColor(android.graphics.Color.rgb(results.get(position).color.r, results.get(position).color.g, results.get(position).color.b));
 
         return row;

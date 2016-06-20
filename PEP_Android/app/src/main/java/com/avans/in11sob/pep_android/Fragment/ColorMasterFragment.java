@@ -73,7 +73,7 @@ public class ColorMasterFragment extends Fragment {
                 Color c = adapter.getItem(position);
                 listener.onListItemSelected(c);
                 Bundle data = new Bundle();
-                getActivity().setTitle(c.color.name);
+//                getActivity().setTitle(c.color.name);
                 data.putInt("colorPosition", position);
             }
         });
