@@ -3,40 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:opencv="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scanColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/stijl"
-        android:layout_height="match_parent"
-        android:layout_width="25dp"
-        card_view:cardBackgroundColor="@color/panelColor">
-
-    </android.support.v7.widget.CardView>
+    android:orientation="horizontal"
+    android:background="@color/buttonEvenColor">
 
     <org.opencv.android.JavaCameraView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="15dp"
         android:id="@+id/scannerCameraView"
-        opencv:show_fps="true"
+        opencv:show_fps="false"
         opencv:camera_id="back">
     </org.opencv.android.JavaCameraView>
-
-    <!--<view-->
-        <!--android:id="@+id/idsquareOuter"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@color/black">-->
-
-        <!--<view-->
-        <!--android:id="@+id/squareInner"-->
-        <!--android:height="75dp"-->
-        <!--android:width="75dp"-->
-        <!--android:gravity="center"-->
-        <!--android:background="#00000000">-->
-        <!--</view>-->
-    <!--</view>-->
-
 </LinearLayout>

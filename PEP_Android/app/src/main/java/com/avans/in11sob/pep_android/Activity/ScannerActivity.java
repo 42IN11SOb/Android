@@ -3,10 +3,10 @@ package com.avans.in11sob.pep_android.Activity;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.avans.in11sob.pep_android.Api.Models.Color;
@@ -27,7 +27,7 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     private static int WindowWidth;
     private static int WindowHeight;
     Profile pro = Profile.getInstance();
-    public CardView mCardView;
+    public LinearLayout mColorView;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -54,11 +54,10 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
         setContentView(R.layout.activity_scanner);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         mOpenCvCameraView = (JavaCameraView) findViewById(R.id.scannerCameraView);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        mCardView = (CardView) findViewById(R.id.stijl);
+        mColorView = (LinearLayout) findViewById(R.id.scanColor);
     }
 
     public void onResume() {
@@ -84,14 +83,15 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
         super.onDestroy();
         if(mOpenCvCameraView != null) {
             mOpenCvCameraView.disableView();
-            rowCol.clear();
+//            rowCol.clear();
         }
     }
 
     Mat newMat;
+//    Map<Double, Double>rowCol = new HashMap<Double, Double>();
     @Override
     public void onCameraViewStarted(int width, int height) {
-        Log.e("BREEDTE:: ", String.valueOf(width));Log.e("HOOGTE:: ",String.valueOf(height));
+//        Log.e("BREEDTE:: ", String.valueOf(width));Log.e("HOOGTE:: ",String.valueOf(height));
         WindowWidth = width;
         WindowHeight = height;
         // TL   TC  TR
@@ -106,17 +106,17 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
         //              BL::    ROW*.25, COL*.75    300*750
         //              BC::    ROW*.50, COL*.75    600*750
         //              BR::    ROW*.75, COL*.75    600*750
-        rowCol.put((WindowWidth*0.25),(WindowHeight*0.25));
-        rowCol.put((WindowWidth*0.50),(WindowHeight*0.25));
-        rowCol.put((WindowWidth*0.75),(WindowHeight*0.25));
-
-        rowCol.put((WindowWidth*0.25),(WindowHeight*0.50));
-        rowCol.put((WindowWidth*0.50),(WindowHeight*0.50));
-        rowCol.put((WindowWidth*0.75),(WindowHeight*0.50));
-
-        rowCol.put((WindowWidth*0.25),(WindowHeight*0.75));
-        rowCol.put((WindowWidth*0.50),(WindowHeight*0.75));
-        rowCol.put((WindowWidth*0.75),(WindowHeight*0.75));
+//        rowCol.put((WindowWidth*0.25),(WindowHeight*0.25));
+//        rowCol.put((WindowWidth*0.50),(WindowHeight*0.25));
+//        rowCol.put((WindowWidth*0.75),(WindowHeight*0.25));
+//
+//        rowCol.put((WindowWidth*0.25),(WindowHeight*0.50));
+//        rowCol.put((WindowWidth*0.50),(WindowHeight*0.50));
+//        rowCol.put((WindowWidth*0.75),(WindowHeight*0.50));
+//
+//        rowCol.put((WindowWidth*0.25),(WindowHeight*0.75));
+//        rowCol.put((WindowWidth*0.50),(WindowHeight*0.75));
+//        rowCol.put((WindowWidth*0.75),(WindowHeight*0.75));
 
         newMat = new Mat();
     }
@@ -125,7 +125,7 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     public void onCameraViewStopped() {
         newMat.release();
     }
-    Map<Double, Double>rowCol = new HashMap<Double, Double>();
+
     @Override
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         int rows = inputFrame.rgba().rows();
@@ -149,20 +149,24 @@ public class ScannerActivity extends Activity implements CvCameraViewListener2 {
     }
 
     public void compareColor(int R, int G, int B) {
-//        mCardView.setBackgroundColor(android.graphics.Color.rgb(R, G, B)); // crashed by setten
+        final int Rc = R;
+        final int Gc = G;
+        final int Bc = B;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mColorView.setBackgroundColor(android.graphics.Color.rgb(Rc, Gc, Bc)); //
+            }
+        });
         // get profilecolors
         int margin = 30;
         for (Color rgb : pro.data.passport.season.colors) {
-//            if(((rgb.color.r - R) <= margin) || ((R - rgb.color.r) <= -margin)) {
             if(rgb.color.r > (R - margin) && rgb.color.r < (R + margin) &&
                     rgb.color.g > (G - margin) && rgb.color.g < (G + margin) &&
                     rgb.color.b > (B - margin) && rgb.color.b < (B + margin)) {
                 Log.e("SUCCESS", "YOU HAVE FOUND A COLOUR " + rgb.color.name);
                 return;
             }
-//            rgb.color.r = R
-//            rgb.color.g = G
-//            rgb.color.b = B
         }
     }
 }
