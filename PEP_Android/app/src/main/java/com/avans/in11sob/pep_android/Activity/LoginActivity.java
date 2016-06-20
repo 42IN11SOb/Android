@@ -15,10 +15,12 @@ import android.widget.EditText;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.avans.in11sob.pep_android.Api.Models.Login;
+import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.avans.in11sob.pep_android.Model.User;
 import com.avans.in11sob.pep_android.R;
 import com.avans.in11sob.pep_android.Utilities.ApiRequests;
 import com.avans.in11sob.pep_android.Utilities.App;
+import com.avans.in11sob.pep_android.Utilities.GsonGetRequest;
 import com.avans.in11sob.pep_android.Utilities.GsonPostRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -113,6 +115,29 @@ public class LoginActivity extends Activity {
                                     editor.putString("token", response.data.token);
                                     editor.commit();
                                     Log.e("Token", "Token submitted: " + response.data.token);
+
+                                    Context context = getApplicationContext();
+                                    SharedPreferences sharedPrefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+
+                                    final GsonGetRequest<Profile> gsonGetRequest =
+                                            ApiRequests.profile(
+                                                    new Response.Listener<Profile>() {
+                                                        @Override
+                                                        public void onResponse(Profile response) {
+                                                            // The profile is automatic set within a Singleton class.
+                                                            // No further handling required here
+                                                        }
+                                                    },
+                                                    new Response.ErrorListener() {
+                                                        @Override
+                                                        public void onErrorResponse(VolleyError error) {
+
+                                                        }
+                                                    },
+                                                    sharedPrefs.getString("token", null)
+                                            );
+
+                                    App.addRequest(gsonGetRequest, "profile");
 
                                     //User user = new User(getApplicationContext(), username, password, token);
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

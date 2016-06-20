@@ -1,13 +1,21 @@
 package com.avans.in11sob.pep_android.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.avans.in11sob.pep_android.R;
+import com.avans.in11sob.pep_android.Utilities.ApiRequests;
+import com.avans.in11sob.pep_android.Utilities.App;
+import com.avans.in11sob.pep_android.Utilities.GsonGetRequest;
 
 import org.opencv.android.OpenCVLoader;
 

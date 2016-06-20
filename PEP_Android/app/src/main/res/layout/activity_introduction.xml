@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backgroundColor"
+    tools:context="com.avans.in11sob.pep_android.Activity.IntroductionActivity">
+
+    <LinearLayout
+        android:layout_weight="0.7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <Button
+            android:id="@+id/nonVisitedPEP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ik ben niet bij een PEP-dag geweest"
+            android:background="@color/panelColor"
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="buttonClick"/>
+        <Button
+            android:id="@+id/visitedPEP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ik ben bij een PEP-dag geweest"
+            android:background="@color/panelColor"
+            android:paddingLeft="40dp"
+            android:paddingTop="40dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="40dp"
+            android:onClick="buttonClick"/>
+    </LinearLayout>
+</LinearLayout>
