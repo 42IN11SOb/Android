@@ -25,28 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Context context = getApplicationContext();
-        SharedPreferences sharedPrefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
-
-        final GsonGetRequest<Profile> gsonGetRequest =
-                ApiRequests.profile(
-                        new Response.Listener<Profile>() {
-                            @Override
-                            public void onResponse(Profile response) {
-
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        },
-                        sharedPrefs.getString("token", null)
-                );
-
-        App.addRequest(gsonGetRequest, "profile");
     }
 
     public void buttonClick(View view){
