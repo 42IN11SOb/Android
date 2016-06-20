@@ -6,12 +6,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature android:name="android.hardware.camera2"/>
-    <!--<uses-feature android:name="android.hardware.camera" android:required="false"/>-->
-    <!--<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>-->
-    <!--<uses-feature android:name="android.hardware.camera.front" android:required="false"/>-->
-    <!--<uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false"/>-->
+    <uses-feature android:name="android.hardware.camera2" />
 
+    <!-- <uses-feature android:name="android.hardware.camera" android:required="false"/> -->
+    <!-- <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/> -->
+    <!-- <uses-feature android:name="android.hardware.camera.front" android:required="false"/> -->
+    <!-- <uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false"/> -->
     <application
         android:name=".Utilities.App"
         android:allowBackup="true"
@@ -32,7 +32,7 @@
         <activity
             android:name=".Activity.ScannerActivity"
             android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activity.PassportActivity"
             android:configChanges="orientation"
@@ -45,10 +45,8 @@
             android:name=".Activity.StijlActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activity.ColorMasterActivity" />
-        <activity
-            android:name=".Activity.ColorDetailActivity" />
+        <activity android:name=".Activity.ColorMasterActivity" />
+        <activity android:name=".Activity.ColorDetailActivity" />
         <activity
             android:name=".Activity.SplashActivity"
             android:configChanges="orientation"
@@ -69,6 +67,7 @@
             android:configChanges="orientation"
             android:noHistory="true"
             android:screenOrientation="portrait" />
+        <activity android:name=".Activity.NewsActivity"></activity>
     </application>
 
 </manifest>

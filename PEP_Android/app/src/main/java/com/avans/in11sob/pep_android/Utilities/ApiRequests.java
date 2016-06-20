@@ -7,6 +7,7 @@ import com.android.volley.BuildConfig;
 import com.android.volley.Response;
 import com.avans.in11sob.pep_android.Api.Models.IsLoggedIn;
 import com.avans.in11sob.pep_android.Api.Models.Login;
+import com.avans.in11sob.pep_android.Api.Models.NewsCollection;
 import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,6 +24,25 @@ public class ApiRequests {
     private static final Gson gson = new GsonBuilder()
             //.registerTypeAdapter(DummyObject.class, new DummyObjectDeserializer())
             .create();
+
+    public static GsonGetRequest<NewsCollection> news
+            (
+                    @NonNull final Response.Listener<NewsCollection> listener,
+                    @NonNull final Response.ErrorListener errorListener
+            )
+    {
+        final String url = "http://projectpep.herokuapp.com/news";
+
+        return new GsonGetRequest<>
+                (
+                        url,
+                        new TypeToken<NewsCollection>() {}.getType(),
+                        gson,
+                        listener,
+                        errorListener
+                );
+    }
+
     /**
      * Returns a dummy object
      *
@@ -95,5 +115,6 @@ public class ApiRequests {
                         errorListener
                 );
     }
+
 
 }
