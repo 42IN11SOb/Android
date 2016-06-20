@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.overig:
-                intent = new Intent(this, OverigActivity.class);
+                intent = new Intent(this, NewsActivity.class);
                 startActivity(intent);
             default:
                 break;
