@@ -53,6 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         URLImageParser p = new URLImageParser(holder.content, context);
         holder.content.setText(Html.fromHtml(newsCollection.get(i).content, p, null));
         holder.content.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.content.setMaxLines(5);
     }
 
     @Override
