@@ -1,14 +1,18 @@
 package com.avans.in11sob.pep_android.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.avans.in11sob.pep_android.Activity.NewsActivity;
 import com.avans.in11sob.pep_android.Api.Models.News;
 import com.avans.in11sob.pep_android.Api.Models.NewsCollection;
 import com.avans.in11sob.pep_android.R;
@@ -50,6 +54,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(NewsViewHolder holder, int i){
         holder.title.setText(newsCollection.get(i).title);
 
+        final Context self = context;
+
+        holder.cv.setTag(i);
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int counter = (int) v.getTag();
+
+                Intent intent = new Intent(self, NewsActivity.class);
+                intent.putExtra("news", newsCollection.get(counter));
+                self.startActivity(intent);
+            }
+        });
+
         URLImageParser p = new URLImageParser(holder.content, context);
         holder.content.setText(Html.fromHtml(newsCollection.get(i).content, p, null));
         holder.content.setMovementMethod(LinkMovementMethod.getInstance());
@@ -68,11 +86,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
+        CardView cv;
         TextView title;
         TextView content;
 
         NewsViewHolder(View itemView){
             super(itemView);
+            cv          = (CardView) itemView.findViewById(R.id.stijl);
             title       = (TextView) itemView.findViewById(R.id.title);
             content     = (TextView) itemView.findViewById(R.id.content);
         }
