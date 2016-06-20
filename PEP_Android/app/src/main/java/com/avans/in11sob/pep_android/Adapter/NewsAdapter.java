@@ -60,13 +60,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Something random", "started onclick");
                 int counter = (int) v.getTag();
 
                 Intent intent = new Intent(self, NewsActivity.class);
                 intent.putExtra("news", newsCollection.get(counter));
                 self.startActivity(intent);
-                Log.e("Something random", "endn  ed onclick");
             }
         });
 
