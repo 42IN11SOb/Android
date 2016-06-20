@@ -3,6 +3,7 @@ package com.avans.in11sob.pep_android.Adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         URLImageParser p = new URLImageParser(holder.content, context);
         holder.content.setText(Html.fromHtml(newsCollection.get(i).content, p, null));
+        holder.content.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
