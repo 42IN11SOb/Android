@@ -13,7 +13,6 @@
         android:id="@+id/stijl"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:onClick="buttonClick"
         card_view:cardBackgroundColor="@color/panelColor">
 
         <LinearLayout
