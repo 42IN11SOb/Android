@@ -52,13 +52,13 @@ public class LoginActivity extends Activity {
             }
         });
 
-        Button mGuestButton = (Button) findViewById(R.id.guestLoginButton);
-        mGuestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                skipLogin();
-            }
-        });
+//        Button mGuestButton = (Button) findViewById(R.id.guestLoginButton);
+//        mGuestButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                skipLogin();
+//            }
+//        });
     }
 
     Intent intent;

@@ -39,7 +39,7 @@ public class SplashActivity extends Activity {
                 Log.e("Token", "Checking token: " + token);
 
                 if (token == null || token.isEmpty()){
-                    LoginActivity.startIntent(SplashActivity.this);
+                    IntroductionActivity.startIntent(SplashActivity.this);
                 } else {
                     final String url = "http://projectpep.herokuapp.com/users/loggedin?token=" + token;
 
