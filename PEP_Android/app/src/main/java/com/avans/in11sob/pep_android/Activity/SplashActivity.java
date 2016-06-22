@@ -12,6 +12,7 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.avans.in11sob.pep_android.Api.Models.IsLoggedIn;
+import com.avans.in11sob.pep_android.Api.Models.Login;
 import com.avans.in11sob.pep_android.Api.Models.Profile;
 import com.avans.in11sob.pep_android.R;
 import com.avans.in11sob.pep_android.Utilities.ApiRequests;
@@ -76,14 +77,14 @@ public class SplashActivity extends Activity {
                                                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                                                 startActivity(intent);
                                             } else {
-                                                IntroductionActivity.startIntent(SplashActivity.this);
+                                                LoginActivity.startIntent(SplashActivity.this);
                                             }
                                         }
                                     },
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
-                                            IntroductionActivity.startIntent(SplashActivity.this);
+                                            LoginActivity.startIntent(SplashActivity.this);
                                         }
                                     },
                                     token
